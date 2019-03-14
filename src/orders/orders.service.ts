@@ -1,10 +1,11 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { AXIOS } from '../core/tokens';
+import { AxiosInstance } from 'axios';
 
 @Injectable()
 export class OrdersService {
   constructor(
-    @Inject(AXIOS) private readonly axios,
+    @Inject(AXIOS) private readonly axios: AxiosInstance,
   ) {
   }
   getAll() {
@@ -12,7 +13,7 @@ export class OrdersService {
   }
 
   saveOrder(order) {
-    this.axios.post('/orders.json', order)
+    this.axios.post('', order)
       .then(response => response.data);
   }
 }
