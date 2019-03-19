@@ -9,11 +9,12 @@ export class OrdersService {
   ) {
   }
   getAll() {
-    return { message: 'Hello Orders from Service' };
+    return this.axios.get('')
+      .then(response => response.data);
   }
 
   saveOrder(order) {
-    this.axios.post('', order)
+    return this.axios.post('', order)
       .then(response => response.data);
   }
 }
