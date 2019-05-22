@@ -1,23 +1,26 @@
 import { Injectable, Inject, HttpException } from '@nestjs/common';
+import { AuthBody } from './authentication.types';
 import { AXIOS } from '../core/tokens';
+import { config } from '../../api-config';
 import { AxiosInstance } from 'axios';
 
 @Injectable()
-export class OrdersService {
+export class AuthenticationService {
   constructor(
-    @Inject(AXIOS) private readonly axios: AxiosInstance,
+    @Inject(AXIOS) private readonly authenticaiton: AxiosInstance,
   ) {
   }
-  getAll(authenticationToken: string) {
-    return this.axios.get('', { params: {auth: authenticationToken} })
+
+  public signUp(signUpBody: AuthBody): Promise<any> {
+    return this.authenticaiton.post(`/signupNewUser?key=${config.API_KEY}`, signUpBody)
       .then(response => response.data)
       .catch(error => {
         throw new HttpException(error.message, error.response.status);
       });
   }
 
-  saveOrder(authenticationToken: string, order) {
-    return this.axios.post('', order, { params: { auth: authenticationToken } })
+  public signIn(signInBody: AuthBody): Promise<any> {
+    return this.authenticaiton.post(`/verifyPassword?key=${config.API_KEY}`, signInBody)
       .then(response => response.data)
       .catch(error => {
         throw new HttpException(error.message, error.response.status);

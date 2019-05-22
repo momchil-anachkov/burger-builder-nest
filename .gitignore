@@ -9,3 +9,4 @@
 /node_modules
 
 /api-config.ts
+/coverage
