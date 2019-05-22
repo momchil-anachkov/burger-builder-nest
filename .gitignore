@@ -4,6 +4,8 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
+.scannerwork
+
 /node_modules
 
 /api-config.ts

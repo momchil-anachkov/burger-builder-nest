@@ -1,6 +1,7 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, HttpException } from '@nestjs/common';
 import { AXIOS } from '../core/tokens';
 import { AxiosInstance } from 'axios';
+import { stringify } from 'querystring';
 
 @Injectable()
 export class OrdersService {
@@ -8,13 +9,19 @@ export class OrdersService {
     @Inject(AXIOS) private readonly axios: AxiosInstance,
   ) {
   }
-  getAll() {
-    return this.axios.get('')
-      .then(response => response.data);
+  getAll(authenticationToken: string) {
+    return this.axios.get('', { params: {auth: authenticationToken} })
+      .then(response => response.data)
+      .catch(error => {
+        throw new HttpException(error.message, error.response.status);
+      });
   }
 
-  saveOrder(order) {
-    return this.axios.post('', order)
-      .then(response => response.data);
+  saveOrder(authenticationToken: string, order) {
+    return this.axios.post('', order, { params: { auth: authenticationToken } })
+      .then(response => response.data)
+      .catch(error => {
+        throw new HttpException(error.message, error.response.status);
+      });
   }
 }

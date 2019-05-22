@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Req } from '@nestjs/common';
 import { IngredientsService } from './ingredients.service';
+import { Request } from 'express';
 
 @Controller('ingredients')
 export class IngredientsController {
@@ -9,7 +10,7 @@ export class IngredientsController {
   }
 
   @Get()
-  getAllIngredients() {
-    return this.ingredients.getAll();
+  getAllIngredients(@Req() request: Request) {
+    return this.ingredients.getAll(request.query.auth);
   }
 }
