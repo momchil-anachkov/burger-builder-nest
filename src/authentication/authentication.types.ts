@@ -3,9 +3,3 @@ export interface AuthBody {
   password: string;
   returnSecureToken: boolean;
 }
-
-// tslint:disable-next-line:no-empty-interface
-// export interface AuthBody extends AuthBody {}
-
-// // tslint:disable-next-line:no-empty-interface
-// export interface AuthBody extends AuthBody {}
