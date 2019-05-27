@@ -15,7 +15,10 @@ export class AuthenticationService {
     return this.authenticaiton.post(`/signupNewUser?key=${config.API_KEY}`, signUpBody)
       .then(response => response.data)
       .catch(error => {
-        throw new HttpException(error.message, error.response.status);
+        throw new HttpException({
+          ...error.response.data,
+          message: error.message,
+        }, error.response.status);
       });
   }
 
@@ -23,7 +26,11 @@ export class AuthenticationService {
     return this.authenticaiton.post(`/verifyPassword?key=${config.API_KEY}`, signInBody)
       .then(response => response.data)
       .catch(error => {
-        throw new HttpException(error.message, error.response.status);
+        throw new HttpException({
+          ...error.response.data,
+          message: error.message,
+        }, error.response.status);
       });
   }
+
 }
