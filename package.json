@@ -6,31 +6,36 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "docs:build": "compodoc -p tsconfig.docs.json",
+    "docs:serve": "compodoc -p tsconfig.docs.json -s",
     "format": "prettier --write \"src/**/*.ts\"",
-    "start": "ts-node -r tsconfig-paths/register src/main.ts",
-    "start:dev": "nodemon",
-    "start:debug": "nodemon --config nodemon-debug.json",
-    "prestart:prod": "rimraf dist && npm run build",
-    "start:prod": "node dist/main.js",
     "lint": "tslint -p tsconfig.json -c tslint.json",
+    "prestart:prod": "rimraf dist && npm run build",
+    "sonar": "sonar-scanner.bat",
+    "sonar:report": "java -jar cnesreport.jar -p nest-burger-builder",
+    "start": "ts-node -r tsconfig-paths/register src/main.ts",
+    "start:debug": "nodemon --config nodemon-debug.json",
+    "start:dev": "nodemon",
+    "start:prod": "node dist/main.js",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
+    "test:coverage": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/jest/bin/jest.js --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "sonar": "sonar-scanner.bat",
-    "sonar:report": "java -jar cnesreport.jar -p nest-burger-builder"
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@nestjs/common": "^5.4.0",
     "@nestjs/core": "^5.4.0",
+    "@nestjs/swagger": "^3.0.2",
     "axios": "^0.18.0",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "rxjs": "^6.2.2",
+    "swagger-ui-express": "^4.0.5",
     "typescript": "^3.0.1"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.9",
     "@nestjs/testing": "^5.1.0",
     "@types/express": "^4.16.0",
     "@types/jest": "^23.3.1",
@@ -59,6 +64,12 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "coverageDirectory": "../coverage",
+    "collectCoverageFrom": [
+      "**/**.ts",
+      "!**/**.axios.ts",
+      "!**/**.module.ts",
+      "!main.ts"
+    ],
     "testEnvironment": "node",
     "testResultsProcessor": "jest-sonar-reporter"
   }

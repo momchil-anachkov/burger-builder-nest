@@ -2,6 +2,26 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AuthenticationService } from './authentication.service';
 import { AXIOS } from '../core/tokens';
 import { AxiosInstance } from 'axios';
+import { HttpException } from '@nestjs/common';
+
+const errorMessage = 'Test error';
+
+const mockAxiosMethodRejection = (axios: AxiosInstance, method) => {
+  axios[method] = () => {
+    return Promise.reject({
+      message: errorMessage,
+      response: {
+        status: 404,
+      },
+    });
+  };
+};
+
+const assertHttpExceptionError = (error: HttpException) => {
+  expect(error).toBeInstanceOf(HttpException);
+  expect(error.getStatus()).toBe(404);
+  expect(error.getResponse()).toEqual({ message: errorMessage});
+};
 
 describe('AuthenticationService', () => {
   let service: AuthenticationService;
@@ -34,13 +54,33 @@ describe('AuthenticationService', () => {
       service.signUp({} as any);
       expect(axiosPost).toHaveBeenCalledTimes(1);
     });
+
+    it('should throw an HttpException on network error', () => {
+      mockAxiosMethodRejection(axios, 'post');
+      const signUp = jest.spyOn(service, 'signUp');
+      expect.assertions(4);
+      expect(signUp).toThrow();
+      service.signIn({} as any).catch((error: HttpException) => {
+        assertHttpExceptionError(error);
+      });
+    });
   });
 
   describe('signIn', () => {
-    it('should call axios.post once on signin', () => {
+    it('should call axios.post once', () => {
       const axiosPost = jest.spyOn(axios, 'post');
       service.signIn({} as any);
       expect(axiosPost).toHaveBeenCalledTimes(1);
+    });
+
+    it('should throw an HttpException on network error', () => {
+      mockAxiosMethodRejection(axios, 'post');
+      const signIn = jest.spyOn(service, 'signIn');
+      expect.assertions(4);
+      expect(signIn).toThrow();
+      service.signIn({} as any).catch((error: HttpException) => {
+        assertHttpExceptionError(error);
+      });
     });
   });
 });

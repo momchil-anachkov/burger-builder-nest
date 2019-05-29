@@ -14,23 +14,20 @@ export class AuthenticationService {
   public signUp(signUpBody: AuthBody): Promise<any> {
     return this.authenticaiton.post(`/signupNewUser?key=${config.API_KEY}`, signUpBody)
       .then(response => response.data)
-      .catch(error => {
-        throw new HttpException({
-          ...error.response.data,
-          message: error.message,
-        }, error.response.status);
-      });
+      .catch(this.handleError);
   }
 
   public signIn(signInBody: AuthBody): Promise<any> {
     return this.authenticaiton.post(`/verifyPassword?key=${config.API_KEY}`, signInBody)
       .then(response => response.data)
-      .catch(error => {
-        throw new HttpException({
-          ...error.response.data,
-          message: error.message,
-        }, error.response.status);
-      });
+      .catch(this.handleError);
+  }
+
+  private handleError(error) {
+    throw new HttpException({
+      ...error.response.data,
+      message: error.message,
+    }, error.response.status);
   }
 
 }

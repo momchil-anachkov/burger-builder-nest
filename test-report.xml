@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="C:\learning\nest\burger-builder\src\ingredients\ingredients.service.spec.ts">
-    <testCase name="IngredientsService should be defined" duration="18"/>
-    <testCase name="IngredientsService getAll should call axios.get once" duration="3"/>
-  </file>
-  <file path="C:\learning\nest\burger-builder\src\orders\orders.controller.spec.ts">
-    <testCase name="Orders Controller should be defined" duration="26"/>
-  </file>
-  <file path="C:\learning\nest\burger-builder\src\orders\orders.service.spec.ts">
-    <testCase name="OrdersService should be defined" duration="23"/>
-    <testCase name="OrdersService saveOrder should call axios.post once" duration="5"/>
-    <testCase name="OrdersService saveOrder should throw an HttpException on network error" duration="4"/>
-    <testCase name="OrdersService getAll should call axios.get once" duration="2"/>
-    <testCase name="OrdersService getAll should throw an HttpException on network error" duration="2"/>
+  <file path="C:\learning\nest\burger-builder\src\ingredients\ingredients.controller.spec.ts">
+    <testCase name="Ingredients Controller should be defined" duration="20"/>
   </file>
   <file path="C:\learning\nest\burger-builder\src\app.controller.spec.ts">
     <testCase name="AppController root should return &quot;Hello World!&quot;" duration="18"/>
   </file>
-  <file path="C:\learning\nest\burger-builder\src\ingredients\ingredients.controller.spec.ts">
-    <testCase name="Ingredients Controller should be defined" duration="17"/>
+  <file path="C:\learning\nest\burger-builder\src\orders\orders.controller.spec.ts">
+    <testCase name="Orders Controller should be defined" duration="19"/>
   </file>
-  <file path="C:\learning\nest\burger-builder\src\authentication\authentication.controller.spec.ts">
-    <testCase name="Authentication Controller should be defined" duration="11"/>
+  <file path="C:\learning\nest\burger-builder\src\ingredients\ingredients.service.spec.ts">
+    <testCase name="IngredientsService should be defined" duration="18"/>
+    <testCase name="IngredientsService getAll should call axios.get once" duration="2"/>
+  </file>
+  <file path="C:\learning\nest\burger-builder\src\orders\orders.service.spec.ts">
+    <testCase name="OrdersService should be defined" duration="20"/>
+    <testCase name="OrdersService saveOrder should call axios.post once" duration="10"/>
+    <testCase name="OrdersService saveOrder should throw an HttpException on network error" duration="0"/>
+    <testCase name="OrdersService getAll should call axios.get once" duration="0"/>
+    <testCase name="OrdersService getAll should throw an HttpException on network error" duration="8"/>
   </file>
   <file path="C:\learning\nest\burger-builder\src\authentication\authentication.service.spec.ts">
-    <testCase name="AuthenticationService should be defined" duration="12"/>
-    <testCase name="AuthenticationService signUp should call axios.post once" duration="3"/>
-    <testCase name="AuthenticationService signIn should call axios.post once on signin" duration="1"/>
+    <testCase name="AuthenticationService should be defined" duration="16"/>
+    <testCase name="AuthenticationService signUp should call axios.post once" duration="0"/>
+    <testCase name="AuthenticationService signUp should throw an HttpException on network error" duration="5"/>
+    <testCase name="AuthenticationService signIn should call axios.post once" duration="0"/>
+    <testCase name="AuthenticationService signIn should throw an HttpException on network error" duration="0"/>
+  </file>
+  <file path="C:\learning\nest\burger-builder\src\authentication\authentication.controller.spec.ts">
+    <testCase name="Authentication Controller should be defined" duration="26"/>
   </file>
 </testExecutions>

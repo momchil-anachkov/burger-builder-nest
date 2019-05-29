@@ -4,6 +4,12 @@ import { IngredientsService } from './ingredients.service';
 import { AXIOS } from '../core/tokens';
 import { IngredientsAxios } from './ingredients.axios';
 
+/**
+ * Aggregates the ingredients functionality of the app.
+ *
+ * @export
+ * @class IngredientsModule
+ */
 @Module({
   controllers: [
     IngredientsController,
