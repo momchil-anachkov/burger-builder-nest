@@ -1,6 +1,5 @@
-import { Controller, Get, Post, Body, Req, Param, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Req, Query } from '@nestjs/common';
 import { OrdersService } from './orders.service';
-import { Request } from 'express';
 
 /**
  * Responsible for defining and handling API routes related to orders
@@ -15,37 +14,38 @@ export class OrdersController {
   /**
    * Handles requests for fetching all the orders
    *
-   * @param {Request} request
+   * @param {string} authenticationToken
    * @returns
    * @memberof OrdersController
    */
   @Get('all')
-  getAllOrders(@Req() request: Request) {
-    return this.orders.getAll(request.query.auth);
+  getAllOrders(@Query('auth') authenticationToken: string) {
+    return this.orders.getAll(authenticationToken);
   }
 
   /**
    * Handles requests for fetching orders for a specific user
    *
-   * @param {Request} request
+   * @param {string} authenticationToken
+   * @param {string} userId
    * @returns
    * @memberof OrdersController
    */
   @Get('byUser')
-  getOrdersByUser(@Req() request: Request, @Query('userId') userId) {
-    return this.orders.getByUser(request.query.auth, userId);
+  getOrdersByUser(@Query('auth') authenticationToken: string, @Query('userId') userId) {
+    return this.orders.getByUser(authenticationToken, userId);
   }
 
   /**
    * Handles requests for submitting a new order
    *
-   * @param {Request} request
+   * @param {string} authenticationToken
    * @param {*} orderDto
    * @returns
    * @memberof OrdersController
    */
   @Post()
-  saveOrder(@Req() request: Request, @Body() orderDto) {
-    return this.orders.saveOrder(request.query.auth, orderDto);
+  saveOrder(@Req() authenticationToken: string, @Body() orderDto) {
+    return this.orders.saveOrder(authenticationToken, orderDto);
   }
 }

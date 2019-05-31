@@ -1,6 +1,5 @@
-import { Controller, Get, Req } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { IngredientsService } from './ingredients.service';
-import { Request } from 'express';
 
 /**
  * Responsible for defining and handling API routes related to ingrediengs
@@ -25,12 +24,12 @@ export class IngredientsController {
   /**
    * Handles requests for fetching all the ingrediengs
    *
-   * @param {Request} request
+   * @param {string} authenticationToken
    * @returns
    * @memberof IngredientsController
    */
   @Get()
-  getAllIngredients(@Req() request: Request) {
-    return this.ingredients.getAll(request.query.auth);
+  getAllIngredients(@Query('auth') authenticationToken: string) {
+    return this.ingredients.getAll(authenticationToken);
   }
 }
