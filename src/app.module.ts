@@ -5,6 +5,12 @@ import { OrdersModule } from './orders/orders.module';
 import { IngredientsModule } from './ingredients/ingredients.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 
+/**
+ * Root module for the application. Imports all feature modules
+ *
+ * @export
+ * @class AppModule
+ */
 @Module({
   imports: [
     OrdersModule,

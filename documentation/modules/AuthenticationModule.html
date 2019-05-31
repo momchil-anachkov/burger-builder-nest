@@ -121,6 +121,13 @@
         </p>
 
 
+        <p class="comment">
+            <h3>Description</h3>
+        </p>
+        <p class="comment">
+            <p>Aggregates the authentication functionality of the app.</p>
+
+        </p>
 
 
         <div class="container-fluid module">
@@ -157,6 +164,12 @@ import { AuthenticationService } from &#x27;./authentication.service&#x27;;
 import { AXIOS } from &#x27;../core/tokens&#x27;;
 import { AuthenticationAxios } from &#x27;./authentication.axios&#x27;;
 
+/**
+ * Aggregates the authentication functionality of the app.
+ *
+ * @export
+ * @class AuthenticationModule
+ */
 @Module({
   controllers: [AuthenticationController],
   providers: [

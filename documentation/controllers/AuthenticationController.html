@@ -64,6 +64,13 @@
                 <code>authentication</code>
             </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Responsible for defining and handling API routes related to authentication</p>
+
+            </p>
 
 
 
@@ -137,14 +144,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="18"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:18</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="44"
+                            class="link-to-prism">src/authentication/authentication.controller.ts:44</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Handles requests for signing in an existing user</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -216,14 +225,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="13"
-                            class="link-to-prism">src/authentication/authentication.controller.ts:13</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="32"
+                            class="link-to-prism">src/authentication/authentication.controller.ts:32</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Handles requests for signing up a new user</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -272,18 +283,44 @@
 import { AuthBody } from &#x27;./authentication.types&#x27;;
 import { AuthenticationService } from &#x27;./authentication.service&#x27;;
 
+/**
+ * Responsible for defining and handling API routes related to authentication
+ *
+ * @export
+ * @class AuthenticationController
+ */
 @Controller(&#x27;authentication&#x27;)
 export class AuthenticationController {
+
+  /**
+   * Creates an instance of AuthenticationController
+   * @param {AuthenticationService} authentication
+   * @memberof AuthenticationController
+   */
   constructor(
     private readonly authentication: AuthenticationService,
   ) {
   }
 
+  /**
+   * Handles requests for signing up a new user
+   *
+   * @param {AuthBody} signUpBody
+   * @returns {Promise&lt;any&gt;}
+   * @memberof AuthenticationController
+   */
   @Post(&#x27;signup&#x27;)
   public signUp(@Body() signUpBody: AuthBody): Promise&lt;any&gt; {
     return this.authentication.signUp(signUpBody);
   }
 
+  /**
+   * Handles requests for signing in an existing user
+   *
+   * @param {AuthBody} signInBody
+   * @returns {Promise&lt;any&gt;}
+   * @memberof AuthenticationController
+   */
   @Post(&#x27;signin&#x27;)
   public signIn(@Body() signInBody: AuthBody): Promise&lt;any&gt; {
     return this.authentication.signIn(signInBody);

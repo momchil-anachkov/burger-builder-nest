@@ -161,6 +161,13 @@
         </p>
 
 
+        <p class="comment">
+            <h3>Description</h3>
+        </p>
+        <p class="comment">
+            <p>Root module for the application. Imports all feature modules</p>
+
+        </p>
 
 
         <div class="container-fluid module">
@@ -213,6 +220,12 @@ import { OrdersModule } from &#x27;./orders/orders.module&#x27;;
 import { IngredientsModule } from &#x27;./ingredients/ingredients.module&#x27;;
 import { AuthenticationModule } from &#x27;./authentication/authentication.module&#x27;;
 
+/**
+ * Root module for the application. Imports all feature modules
+ *
+ * @export
+ * @class AppModule
+ */
 @Module({
   imports: [
     OrdersModule,

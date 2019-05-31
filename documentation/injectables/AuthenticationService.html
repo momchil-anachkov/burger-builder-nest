@@ -59,8 +59,20 @@
             <code>src/authentication/authentication.service.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Responsible for auth-related communication with the Firebase API</p>
+
+            </p>
 
 
+            <p class="comment">
+                <h3>Example</h3>
+            </p>
+            <div class="io-description">
+            </div>
 
             <section>
     <h3 id="index">Index</h3>
@@ -110,12 +122,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/authentication/authentication.service.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/authentication/authentication.service.ts:14</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of AuthenticationService.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -177,14 +191,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="26"
-                            class="link-to-prism">src/authentication/authentication.service.ts:26</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">src/authentication/authentication.service.ts:60</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Handles communication errors, extracting only the relevant data</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -245,14 +261,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="20"
-                            class="link-to-prism">src/authentication/authentication.service.ts:20</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="47"
+                            class="link-to-prism">src/authentication/authentication.service.ts:47</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Signs in an existing user</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -317,14 +335,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">src/authentication/authentication.service.ts:14</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="34"
+                            class="link-to-prism">src/authentication/authentication.service.ts:34</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Signs up a new user</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -377,25 +397,59 @@ import { AXIOS } from &#x27;../core/tokens&#x27;;
 import { config } from &#x27;../../api-config&#x27;;
 import { AxiosInstance } from &#x27;axios&#x27;;
 
+/**
+ * Responsible for auth-related communication with the Firebase API
+ *
+ * @export
+ * @class AuthenticationService
+ */
 @Injectable()
 export class AuthenticationService {
+
+  /**
+   * Creates an instance of AuthenticationService.
+   *
+   * @param {AxiosInstance} authenticaiton
+   * @memberof AuthenticationService
+   */
   constructor(
     @Inject(AXIOS) private readonly authenticaiton: AxiosInstance,
   ) {
   }
 
+  /**
+   * Signs up a new user
+   *
+   * @param {AuthBody} signUpBody
+   * @returns {Promise&lt;any&gt;}
+   * @memberof AuthenticationService
+   */
   public signUp(signUpBody: AuthBody): Promise&lt;any&gt; {
     return this.authenticaiton.post(&#x60;/signupNewUser?key&#x3D;${config.API_KEY}&#x60;, signUpBody)
       .then(response &#x3D;&gt; response.data)
       .catch(this.handleError);
   }
 
+  /**
+   * Signs in an existing user
+   *
+   * @param {AuthBody} signInBody
+   * @returns {Promise&lt;any&gt;}
+   * @memberof AuthenticationService
+   */
   public signIn(signInBody: AuthBody): Promise&lt;any&gt; {
     return this.authenticaiton.post(&#x60;/verifyPassword?key&#x3D;${config.API_KEY}&#x60;, signInBody)
       .then(response &#x3D;&gt; response.data)
       .catch(this.handleError);
   }
 
+  /**
+   * Handles communication errors, extracting only the relevant data
+   *
+   * @private
+   * @param {*} error
+   * @memberof AuthenticationService
+   */
   private handleError(error) {
     throw new HttpException({
       ...error.response.data,
