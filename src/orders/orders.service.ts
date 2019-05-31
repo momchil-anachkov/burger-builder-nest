@@ -45,8 +45,8 @@ export class OrdersService {
       .get('', {
         params: {
           auth: authenticationToken,
-          orderBy: 'userId',
-          equalTo: userId,
+          orderBy: '"userId"',
+          equalTo: `"${userId}"`,
       },
     })
       .then((response) => response.data)

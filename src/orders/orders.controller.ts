@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Req, Param, Query } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { Request } from 'express';
 
@@ -32,8 +32,8 @@ export class OrdersController {
    * @memberof OrdersController
    */
   @Get('byUser')
-  getOrdersByUser(@Req() request: Request) {
-    return this.orders.getByUser(request.query.auth, request.body.userId);
+  getOrdersByUser(@Req() request: Request, @Query('userId') userId) {
+    return this.orders.getByUser(request.query.auth, userId);
   }
 
   /**
