@@ -60,7 +60,7 @@ describe('AuthenticationService', () => {
       const signUp = jest.spyOn(service, 'signUp');
       expect.assertions(4);
       expect(signUp).toThrow();
-      service.signIn({} as any).catch((error: HttpException) => {
+      service.signUp({} as any).catch((error: HttpException) => {
         assertHttpExceptionError(error);
       });
     });
@@ -68,6 +68,7 @@ describe('AuthenticationService', () => {
 
   describe('signIn', () => {
     it('should call axios.post once', () => {
+
       const axiosPost = jest.spyOn(axios, 'post');
       service.signIn({} as any);
       expect(axiosPost).toHaveBeenCalledTimes(1);
