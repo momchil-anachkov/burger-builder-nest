@@ -45,7 +45,7 @@ export class OrdersController {
    * @memberof OrdersController
    */
   @Post()
-  saveOrder(@Req() authenticationToken: string, @Body() orderDto) {
+  saveOrder(@Query('auth') authenticationToken: string, @Body() orderDto) {
     return this.orders.saveOrder(authenticationToken, orderDto);
   }
 }

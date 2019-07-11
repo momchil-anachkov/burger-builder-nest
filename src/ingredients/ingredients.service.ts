@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, HttpException } from '@nestjs/common';
 import { AxiosInstance } from 'axios';
 import { AXIOS } from '../core/tokens';
 
@@ -31,6 +31,9 @@ export class IngredientsService {
    */
   getAll(authenticationToken: string) {
     return this.ingredients.get('', { params: { auth: authenticationToken } })
-      .then(result => result.data);
+      .then(result => result.data)
+      .catch((error) => {
+        throw new HttpException(error.message, error.response.status);
+      });
   }
 }
